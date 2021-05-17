@@ -33,11 +33,11 @@ class DetailTvActivity : AppCompatActivity() {
         if (extras != null) {
             val courseId = extras.getInt(EXTRA_COURSE,0)
             viewModel.id = courseId
-            viewModel.getMovieDetail().observe(this, {
+            viewModel.getTvDetail().observe(this, {
                 if(it != null){
-                    detailMovieBinding.textTitle.text = it.originalTitle
+                    detailMovieBinding.textTitle.text = it.originalName
                     detailMovieBinding.textDescription.text = it.overview
-                    detailMovieBinding.textDate.text = it.releaseDate
+                    detailMovieBinding.textDate.text = it.firstAirDate
                     detailMovieBinding.textDesc.text = it.id.toString()
 
                     Glide.with(this)

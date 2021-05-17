@@ -19,7 +19,9 @@ import org.junit.Test
 class HomeActivityTest {
 
     private val dummyMovie = DataDummy.generateDummyMovie()
+    private val dummyDetailMovie = DataDummy.generateDummyDetailMovie()
     private val dummyTv = DataDummy.generateDummyTv()
+    private val dummyDetailTv = DataDummy.generateDummyTvDetail()
 
     @Before
     fun setUp() {
@@ -40,26 +42,34 @@ class HomeActivityTest {
 
     @Test
     fun loadDetailMovie() {
-        onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
         onView(withId(R.id.text_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_title)).check(matches(withText(dummyDetailMovie.originalTitle)))
         onView(withId(R.id.text_desc)).check(matches(isDisplayed()))
         onView(withId(R.id.text_description)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_description)).check(matches(withText(dummyDetailMovie.overview)))
         onView(withId(R.id.text_date)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_date)).check(matches(withText(dummyDetailMovie.releaseDate)))
     }
 
     @Test
     fun loadTv() {
+        onView(withText("TV")).perform(click())
         onView(withId(R.id.rv_bookmark)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_bookmark)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTv.size))
     }
 
     @Test
     fun loadDetailTv() {
+        onView(withText("TV")).perform(click())
         onView(withId(R.id.rv_bookmark)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.text_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_title)).check(matches(withText(dummyDetailTv.originalName)))
         onView(withId(R.id.text_desc)).check(matches(isDisplayed()))
         onView(withId(R.id.text_description)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_description)).check(matches(withText(dummyDetailTv.overview)))
         onView(withId(R.id.text_date)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_date)).check(matches(withText(dummyDetailTv.firstAirDate)))
     }
 
 
