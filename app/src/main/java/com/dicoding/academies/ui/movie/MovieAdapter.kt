@@ -10,6 +10,7 @@ import com.dicoding.academies.R
 import com.dicoding.academies.data.source.local.entity.MovieEntity
 import com.dicoding.academies.databinding.ItemsMovieBinding
 import com.dicoding.academies.ui.detail.DetailMovieActivity
+import com.dicoding.academies.utils.Constant.Companion.POSTER_BASE_URL
 import kotlin.collections.ArrayList
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.CourseViewHolder>() {
@@ -44,9 +45,9 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.CourseViewHolder>() {
                     itemView.context.startActivity(intent)
                 }
                 Glide.with(itemView.context)
-                        .load(detailMovie.posterPath)
+                        .load(POSTER_BASE_URL + detailMovie.posterPath)
                         .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)
-                                .error(R.drawable.ic_error))
+                        .error(R.drawable.ic_error))
                         .into(imgPoster)
             }
         }

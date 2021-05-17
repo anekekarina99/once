@@ -4,9 +4,6 @@ import com.dicoding.academies.data.source.local.entity.DetailMovieEntity
 import com.dicoding.academies.data.source.local.entity.DetailTvEntity
 import com.dicoding.academies.data.source.local.entity.MovieEntity
 import com.dicoding.academies.data.source.local.entity.TvEntity
-import com.dicoding.academies.data.source.remote.response.MovieResponse
-import com.dicoding.academies.data.source.remote.response.DetailMovieResponse
-import com.dicoding.academies.data.source.remote.response.TvResponse
 
 import java.util.ArrayList
 
@@ -26,18 +23,15 @@ object DataDummy {
         return courses
     }
 
-    fun generateDummyDetailMovie(id:Int): ArrayList<DetailMovieEntity> {
+    fun generateDummyDetailMovie(): DetailMovieEntity {
 
-        val courses = ArrayList<DetailMovieEntity>()
-
-        courses.add(DetailMovieEntity(460465,
+        return DetailMovieEntity(460465,
                 "/6Wdl9N6dL0Hi0T1qJLWSz6gMLbd.jpg",
                 "Mortal Kombat",
                 "2021-04-07",
                 "Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.",
-        ))
+        )
 
-        return courses
     }
 
     fun generateDummyTv(): ArrayList<TvEntity> {
@@ -54,18 +48,15 @@ object DataDummy {
         return courses
     }
 
-    fun generateDummyTvDetail(id:Int): ArrayList<DetailTvEntity> {
+    fun generateDummyTvDetail(): DetailTvEntity {
 
-        val courses = ArrayList<DetailTvEntity>()
-
-        courses.add(DetailTvEntity(88396,
+        return DetailTvEntity(88396,
                 "/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
                 "The Falcon and the Winter Soldier",
                 "2021-03-19",
                 "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
-        ))
+        )
 
-        return courses
     }
 
 }

@@ -5,8 +5,7 @@ import com.dicoding.academies.data.source.remote.RemoteDataSource
 import com.dicoding.academies.utils.DataDummy
 import com.dicoding.academies.utils.LiveDataTestUtil
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.mock
@@ -25,11 +24,11 @@ class AcademyRepositoryTest {
 
     private val movieResponses = DataDummy.generateDummyMovie()
     private val mId = movieResponses[0].id
-    private val movieDetailResponses = DataDummy.generateDummyDetailMovie(mId)
+    private val movieDetailResponses = DataDummy.generateDummyDetailMovie()
 
     private val tvResponses = DataDummy.generateDummyTv()
     private val tId = tvResponses[0].id
-    private val tvDetailResponses = DataDummy.generateDummyTvDetail(tId)
+    private val tvDetailResponses = DataDummy.generateDummyTvDetail()
 
     @Test
     fun getMoviePopular() {
@@ -41,7 +40,7 @@ class AcademyRepositoryTest {
         val movieEntities = LiveDataTestUtil.getValue(academyRepository.getMoviePopular())
         verify(remote).getMoviePopular(any())
         assertNotNull(movieEntities)
-        assertEquals(movieEntities.size.toLong(), movieEntities.size.toLong())
+        assertEquals(movieResponses.size.toLong(), movieEntities.size.toLong())
     }
 
     @Test
@@ -50,14 +49,14 @@ class AcademyRepositoryTest {
             (invocation.arguments[1] as RemoteDataSource.LoadMovieDetailCallback)
                     .onLoadDetailMovie(movieDetailResponses)
             null
-        }.`when`(remote).getMovieDetails(eq(mId), any())
+        }.`when`(remote).getMovieDetails(any(),eq(mId) )
 
         val courseEntities = LiveDataTestUtil.getValue(academyRepository.getMovieDetail(mId))
 
-        verify(remote).getMovieDetails(eq(mId), any())
+        verify(remote).getMovieDetails(any(),eq(mId))
 
         assertNotNull(courseEntities)
-        assertEquals(movieDetailResponses.size.toLong(), movieDetailResponses.size.toLong())
+        assertEquals(movieDetailResponses.size.toLong(), courseEntities.size.toLong())
     }
 
     @Test
@@ -79,14 +78,14 @@ class AcademyRepositoryTest {
             (invocation.arguments[1] as RemoteDataSource.LoadTvDetailCallback)
                     .onLoadDetailTv(tvDetailResponses)
             null
-        }.`when`(remote).getMovieDetails(eq(tId), any())
+        }.`when`(remote).getMovieDetails(any(),eq(tId) )
 
         val courseEntities = LiveDataTestUtil.getValue(academyRepository.getTvDetail(tId))
 
-        verify(remote).getTvDetails(eq(tId), any())
+        verify(remote).getTvDetails(any(),eq(tId))
 
         assertNotNull(courseEntities)
-        assertEquals(tvDetailResponses.size.toLong(), tvDetailResponses.size.toLong())
+        assertEquals(tvDetailResponses.size.toLong(), courseEntities.size.toLong())
     }
 
 }

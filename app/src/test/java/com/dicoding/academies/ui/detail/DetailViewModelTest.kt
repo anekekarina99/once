@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.dicoding.academies.data.AcademyRepository
 import com.dicoding.academies.data.source.local.entity.DetailMovieEntity
-import com.dicoding.academies.data.source.local.entity.TvEntity
 import com.dicoding.academies.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -14,7 +13,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -23,7 +21,7 @@ class DetailViewModelTest {
     private lateinit var viewModel: DetailViewModel
     private val dummyMovie = DataDummy.generateDummyDetailMovie()
     private val mId = dummyMovie.id
-    private val dummyModules = DataDummy.generateDummyDetailMovie(mId)
+    private val dummyModules = DataDummy.generateDummyDetailMovie()
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -44,7 +42,7 @@ class DetailViewModelTest {
 
     @Test
     fun getMovieDetail() {
-        val course = MutableLiveData<ArrayList<DetailMovieEntity>>()
+        val course = MutableLiveData<DetailMovieEntity>()
         course.value = dummyModules
 
         `when`(academyRepository.getMovieDetail(mId)).thenReturn(course)
@@ -59,16 +57,16 @@ class DetailViewModelTest {
 
     @Test
     fun getModules() {
-        val module = MutableLiveData<ArrayList<DetailMovieEntity>>()
+        val module = MutableLiveData<DetailMovieEntity>()
         module.value = dummyModules
 
         `when`(academyRepository.getMovieDetail(mId)).thenReturn(module)
-        val moduleEntities = viewModel.getModules().value
-        verify(academyRepository).getAllModulesByCourse(courseId)
+        val moduleEntities = viewModel.getMovieDetail().value
+        verify(academyRepository).getMovieDetail(mId)
         assertNotNull(moduleEntities)
-        assertEquals(7, moduleEntities?.size)
+//        assertEquals(7, moduleEntities?.size)
 
-        viewModel.getModules().observeForever(modulesObserver)
-        verify(modulesObserver).onChanged(dummyModules)
+        viewModel.getMovieDetail().observeForever(detailMovieObserver)
+        verify(detailMovieObserver).onChanged(dummyModules)
     }
 }

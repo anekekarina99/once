@@ -3,6 +3,7 @@ package com.dicoding.academies.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dicoding.academies.data.source.local.entity.DetailMovieEntity
+import com.dicoding.academies.data.source.local.entity.DetailTvEntity
 import com.dicoding.academies.data.source.local.entity.MovieEntity
 import com.dicoding.academies.data.source.local.entity.TvEntity
 import com.dicoding.academies.data.source.remote.RemoteDataSource

@@ -10,6 +10,7 @@ import com.dicoding.academies.R
 import com.dicoding.academies.data.source.local.entity.TvEntity
 import com.dicoding.academies.databinding.ItemsTvBinding
 import com.dicoding.academies.ui.detail.DetailTvActivity
+import com.dicoding.academies.utils.Constant.Companion.POSTER_BASE_URL
 import java.util.*
 
 class TvAdapter(private val callback: TvFragmentCallback) : RecyclerView.Adapter<TvAdapter.CourseViewHolder>() {
@@ -45,9 +46,9 @@ class TvAdapter(private val callback: TvFragmentCallback) : RecyclerView.Adapter
                     intent.putExtra(DetailTvActivity.EXTRA_COURSE, detailTv.id)
                     itemView.context.startActivity(intent)
                 }
-                imgShare.setOnClickListener { callback.onShareClick(detailTv) }
+//                imgShare.setOnClickListener { callback.onShareClick(detailTv) }
                 Glide.with(itemView.context)
-                        .load(detailTv.posterPath)
+                        .load(POSTER_BASE_URL + detailTv.posterPath)
                         .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)
                                 .error(R.drawable.ic_error))
                         .into(imgPoster)
